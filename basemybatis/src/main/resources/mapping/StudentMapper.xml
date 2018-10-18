@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ex.mb.basemybatis.dao.StudentMapper">
+  <resultMap id="studentMapInfo" type="com.ex.mb.basemybatis.entity.Student">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="CREATETIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="EN_NAME" jdbcType="VARCHAR" property="enName" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <sql id="base_common_column">
+    t.ID,t.CREATETIME,t.REMARK,t.NAME,t.EN_NAME,t.SEX,t.PHONE
+  </sql>
+  <!--<insert id="insertStudent" useGeneratedKeys="true" keyProperty="id" parameterType="com.ex.mb.basemybatis.entity.Student">
+    insert into t_student (createtime,name,en_name,sex,phone,remark)
+    VALUES(SYSDATE(),#{name},#{enName},#{sex},#{phone},#{remark})
+  </insert>
+  <delete id="deleteStudentById" parameterType="java.lang.Integer">
+    delete from t_student t where t.id = #{id}
+  </delete>
+  <update id="updateStudentById" parameterType="com.ex.mb.basemybatis.entity.Student">
+    UPDATE t_student set name=#{name},en_name=#{enName},sex=#{sex},phone=#{phone},remark=#{remark}
+    where id=#{id}
+  </update>-->
+  <select id="queryStudentAll" resultMap="studentMapInfo">
+    select <include refid="base_common_column" />  from  t_student t
+  </select>
+  <!--<select id="queryStudentById" parameterType="java.lang.Integer" resultMap="studentMapInfo">
+    select <include refid="base_common_column" />  from  t_student t where t.id = #{id}
+  </select>
+  <select id="queryStudentByName" parameterType="java.lang.String" resultMap="studentMapInfo">
+    select <include refid="base_common_column" />  from  t_student t where t.name like '%'#{id}'%'
+  </select>-->
+</mapper>
